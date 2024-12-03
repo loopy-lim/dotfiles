@@ -14,7 +14,7 @@ export NVM_DIR="$HOME/.nvm"
 PATH=~/.console-ninja/.bin:$PATH
 
 # pnpm
-export PNPM_HOME="/Users/loopy/Library/pnpm"
+export PNPM_HOME="$HOME/Library/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
@@ -22,7 +22,7 @@ esac
 # pnpm end
 
 # bun completions
-[ -s "/Users/loopy/.bun/_bun" ] && source "/Users/loopy/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"

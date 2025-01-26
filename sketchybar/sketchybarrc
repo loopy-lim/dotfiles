@@ -1,0 +1,79 @@
+BG=0x00000000
+
+FONT="MesloLGS NF"
+FONT_SIZE=14
+FONT_COLOR=0xffcdd6f4
+ICON_FONT_SIZE=16
+
+ITEM_PADDING=8
+ITEM_COLOR=0x503d3c53
+GAP=6
+
+PLUGIN_DIR="$HOME/.config/sketchybar/plugins"
+
+sketchybar --bar \
+  y_offset=4 height=30 \
+  padding_left=17 padding_right=20 \
+  shadow.color=0x28000000 shadow.angle=0 \
+  color=$BG
+
+sketchybar --default \
+  label.font="$FONT:Bold:$FONT_SIZE" label.color=$FONT_COLOR \
+  label.padding_left=$ITEM_PADDING label.padding_right=$ITEM_PADDING \
+  icon.font="$FONT:Regular:$ICON_FONT_SIZE"\
+  icon.padding_left=$ITEM_PADDING \
+  background.color=$ITEM_COLOR \
+  background.padding_right=$GAP background.height=25 \
+  background.corner_radius=6
+
+# Right
+sketchybar --add item clock right \
+  --set clock \
+  script="$PLUGIN_DIR/clock.sh" \
+  background.padding_right=0 \
+  update_freq=10
+
+sketchybar --add item net right \
+           --set net script="$PLUGIN_DIR/net.sh" \
+                     updates=on \
+                     label.drawing=off \
+                     icon.padding_right=$ITEM_PADDING \
+           --subscribe net wifi_change
+
+sketchybar --add item battery right \
+  --set battery \
+  script="$PLUGIN_DIR/battery.sh" \
+  update_freq=30
+
+sketchybar --add item sound right \
+ --set sound \
+ background.drawing=on \
+ script="$PLUGIN_DIR/sound.sh" \
+ --subscribe sound volume_change
+
+sketchybar --add item music right \
+  --set music \
+  script="$PLUGIN_DIR/music.sh" \
+  label="Loading..." \
+  scroll_texts=on \
+  label.max_chars=14 \
+  label.scroll_speed=10 \
+  label.scroll_delay=2 \
+  --subscribe music media_change system_woke
+
+# Left
+sketchybar --add item weather left \
+  --set weather \
+  icon=󰖐 \
+  script="$PLUGIN_DIR/weather.sh" \
+  update_freq=1500 \
+  --subscribe weather mouse.clicked
+
+# Center
+sketchybar --add item front_app center \
+  --set front_app \
+  script="$PLUGIN_DIR/front-app.sh" \
+  background.drawing=on \
+  --subscribe front_app front_app_switched
+
+sketchybar --update

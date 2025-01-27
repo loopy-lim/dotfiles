@@ -1,79 +1,105 @@
-BG=0x00000000
+#!/bin/bash
 
-FONT="MesloLGS NF"
-FONT_SIZE=14
-FONT_COLOR=0xffcdd6f4
-ICON_FONT_SIZE=16
+source "$CONFIG_DIR/colors.sh" # Loads all defined colors
+source "$CONFIG_DIR/icons.sh" # Loads all defined icons
 
-ITEM_PADDING=8
-ITEM_COLOR=0x503d3c53
-GAP=6
+ITEM_DIR="$CONFIG_DIR/items" # Directory where the items are configured
+PLUGIN_DIR="$CONFIG_DIR/plugins" # Directory where all the plugin scripts are stored
 
-PLUGIN_DIR="$HOME/.config/sketchybar/plugins"
+FONT="SF Pro" # Needs to have Regular, Bold, Semibold, Heavy and Black variants
+PADDINGS=3 # All paddings use this value (icon, label, background)
 
-sketchybar --bar \
-  y_offset=4 height=30 \
-  padding_left=17 padding_right=20 \
-  shadow.color=0x28000000 shadow.angle=0 \
-  color=$BG
+# aerospace setting
+AEROSPACE_FOCUSED_MONITOR_NO=$(aerospace list-workspaces --focused)
+AEROSPACE_LIST_OF_WINDOWS_IN_FOCUSED_MONITOR=$(aerospace list-windows --workspace $AEROSPACE_FOCUSED_MONITOR_NO | awk -F'|' '{gsub(/^ *| *$/, "", $2); print $2}')
 
-sketchybar --default \
-  label.font="$FONT:Bold:$FONT_SIZE" label.color=$FONT_COLOR \
-  label.padding_left=$ITEM_PADDING label.padding_right=$ITEM_PADDING \
-  icon.font="$FONT:Regular:$ICON_FONT_SIZE"\
-  icon.padding_left=$ITEM_PADDING \
-  background.color=$ITEM_COLOR \
-  background.padding_right=$GAP background.height=25 \
-  background.corner_radius=6
+# Setting up and starting the helper process
+HELPER=git.felix.helper
+killall helper
+(cd $CONFIG_DIR/helper && make)
+$CONFIG_DIR/helper/helper $HELPER > /dev/null 2>&1 &
 
-# Right
-sketchybar --add item clock right \
-  --set clock \
-  script="$PLUGIN_DIR/clock.sh" \
-  background.padding_right=0 \
-  update_freq=10
+# Unload the macOS on screen indicator overlay for volume change
+launchctl unload -F /System/Library/LaunchAgents/com.apple.OSDUIHelper.plist > /dev/null 2>&1 &
 
-sketchybar --add item net right \
-           --set net script="$PLUGIN_DIR/net.sh" \
-                     updates=on \
-                     label.drawing=off \
-                     icon.padding_right=$ITEM_PADDING \
-           --subscribe net wifi_change
+# Setting up the general bar appearance of the bar
+bar=(
+  height=45
+  color=$BAR_COLOR
+  border_width=2
+  border_color=$BAR_BORDER_COLOR
+  shadow=off
+  position=top
+  sticky=on
+  padding_right=10
+  padding_left=10
+  y_offset=-5
+  margin=-2
+  topmost=window
+  color=0x00000000
+  border_color=0x00000000
+)
 
-sketchybar --add item battery right \
-  --set battery \
-  script="$PLUGIN_DIR/battery.sh" \
-  update_freq=30
+sketchybar --bar "${bar[@]}"
 
-sketchybar --add item sound right \
- --set sound \
- background.drawing=on \
- script="$PLUGIN_DIR/sound.sh" \
- --subscribe sound volume_change
+# Setting up default values
+defaults=(
+  updates=when_shown
+  icon.font="$FONT:Regular:14.0"
+  icon.color=$ICON_COLOR
+  icon.padding_left=$PADDINS
+  icon.padding_right=$PADDINGS
+  label.font="$FONT:Semibold:13.0"
+  label.color=$LABEL_COLOR
+  label.padding_left=$PADDINGS
+  label.padding_right=$PADDINGS
+#  label.shadow.drawing=off
+#  label.shadow.distance=2
+#  label.shadow.color=0xff000000
+  padding_right=$PADDINGS
+  padding_left=$PADDINGS
+  background.height=26
+  background.corner_radius=9
+  background.border_width=2
+  popup.background.border_width=2
+  popup.background.corner_radius=9
+  popup.background.border_color=$POPUP_BORDER_COLOR
+  popup.background.color=$POPUP_BACKGROUND_COLOR
+  popup.blur_radius=20
+  popup.background.shadow.drawing=on
+  scroll_texts=on
 
-sketchybar --add item music right \
-  --set music \
-  script="$PLUGIN_DIR/music.sh" \
-  label="Loading..." \
-  scroll_texts=on \
-  label.max_chars=14 \
-  label.scroll_speed=10 \
-  label.scroll_delay=2 \
-  --subscribe music media_change system_woke
+)
+
+sketchybar --default "${defaults[@]}"
+
 
 # Left
-sketchybar --add item weather left \
-  --set weather \
-  icon=󰖐 \
-  script="$PLUGIN_DIR/weather.sh" \
-  update_freq=1500 \
-  --subscribe weather mouse.clicked
+source "$ITEM_DIR/apple.sh"
+source "$ITEM_DIR/spaces.sh"
+source "$ITEM_DIR/front_app.sh"
+#source "$ITEM_DIR/yabai.sh"
 
 # Center
-sketchybar --add item front_app center \
-  --set front_app \
-  script="$PLUGIN_DIR/front-app.sh" \
-  background.drawing=on \
-  --subscribe front_app front_app_switched
+# source "$ITEM_DIR/spotify.sh"
+# source "$ITEM_DIR/media.sh"
 
+# Right
+source "$ITEM_DIR/calendar.sh"
+source "$ITEM_DIR/input_source.sh"
+source "$ITEM_DIR/battery.sh"
+#source "$ITEM_DIR/brew.sh"
+source "$ITEM_DIR/github.sh"
+source "$ITEM_DIR/wifi.sh"
+source "$ITEM_DIR/volume.sh"
+source "$ITEM_DIR/svim.sh"
+
+source "$ITEM_DIR/cpu.sh"
+source "$ITEM_DIR/weather.sh"
+
+sketchybar --hotload on
+
+# Forcing all item scripts to run (never do this outside of sketchybarrc)
 sketchybar --update
+
+echo "sketchybar configuation loaded.."

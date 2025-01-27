@@ -1,3 +1,10 @@
-sketchybar --set $NAME \
-  label="$(date '+%a %b %d %Y %-I:%M %p')" \
-  icon="" icon.color=0xffff9cbe
+#!/bin/sh
+
+# The $NAME variable is passed from sketchybar and holds the name of
+# the item invoking this script:
+# https://felixkratz.github.io/SketchyBar/config/events#events-and-scripting
+
+# sketchybar --set "$NAME" label="$(date '+%m/%d %H:%M')"
+sketchybar --set "$NAME" label="$(date '+%m/%d %H:%M')"\
+    label.font="$FONT:Semibold:24"
+

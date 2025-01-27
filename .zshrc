@@ -1,3 +1,5 @@
+user=$(whoami)
+
 export ZSH="$HOME/.oh-my-zsh"
 
 ZSH_THEME="powerlevel10k/powerlevel10k"
@@ -14,7 +16,7 @@ export NVM_DIR="$HOME/.nvm"
 PATH=~/.console-ninja/.bin:$PATH
 
 # pnpm
-export PNPM_HOME="/Users/loopy/Library/pnpm"
+export PNPM_HOME="/Users/${user}/Library/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
@@ -22,7 +24,7 @@ esac
 # pnpm end
 
 # bun completions
-[ -s "/Users/loopy/.bun/_bun" ] && source "/Users/loopy/.bun/_bun"
+[ -s "/Users/${user}/.bun/_bun" ] && source "/Users/${user}/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
@@ -46,9 +48,6 @@ eval "$(fzf --zsh)"
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-# Amazon Q post block. Keep at the bottom of this file.
-[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh"
 
 # -- Use fd instead of fzf --
 
@@ -111,3 +110,8 @@ eval "$(zoxide init zsh)"
 
 fastfetch
 
+# ---- fnm ----
+eval "$(fnm env --use-on-cd --shell zsh)"
+
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

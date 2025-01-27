@@ -1,14 +1,5 @@
 #!/bin/bash
 
-cpu_top=(
-  label.font="$FONT:Semibold:7"
-  label=CPU
-  icon.drawing=off
-  width=0
-  padding_right=15
-  y_offset=6
-)
-
 cpu_percent=(
   label.font="$FONT:Semibold:14"
   label=CPU
@@ -40,9 +31,6 @@ cpu_user=(
   background.color=$TRANSPARENT
 )
 
-# sketchybar --add item cpu.top right              \
-#            --set cpu.top "${cpu_top[@]}"         \
-                                                 \
 sketchybar --add item cpu.percent right          \
            --set cpu.percent "${cpu_percent[@]}" \
                                                  \

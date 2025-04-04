@@ -29,8 +29,8 @@ exec-on-workspace-change = [
 start-at-login = true
 
 # Normalizations. See: https://nikitabobko.github.io/AeroSpace/guide#normalization
-enable-normalization-flatten-containers = false
-enable-normalization-opposite-orientation-for-nested-containers = false
+enable-normalization-flatten-containers = true
+enable-normalization-opposite-orientation-for-nested-containers = true
 
 # See: https://nikitabobko.github.io/AeroSpace/guide#layouts
 # The 'accordion-padding' specifies the size of accordion padding
@@ -60,14 +60,15 @@ key-mapping.preset = 'qwerty'
 #                 Monitor pattern is the same as for 'workspace-to-monitor-force-assignment'.
 #                 See: https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
 [workspace-to-monitor-force-assignment]
-1 = 'main'
-2 = 'main'
-3 = 'V32UE'
-4 = 'V32UE'
-5 = 'V32UE'
-6 = '^27W'
-7 = '^27W'
-10 = '^EPSON'
+1 = ['U13ZA','main']
+2 = ['U13ZA','main']
+3 = ['U13ZA','main']
+4 = ['secondary']
+5 = ['secondary']
+6 = ['secondary']
+7 = ['U13ZA','main']
+8 = ['U13ZA','main']
+9 = ['U13ZA','main']
 
 [gaps]
 inner.horizontal = 8
@@ -108,9 +109,12 @@ PATH = '/opt/homebrew/bin:/opt/homebrew/sbin:${PATH}'
 # See: https://nikitabobko.github.io/AeroSpace/commands#exec-and-forget
 # alt-enter = 'exec-and-forget open -n /System/Applications/Utilities/Terminal.app'
 
+# cmd-h = []
+# cmd-alt-h = []
+
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout
-cmd-slash = 'layout tiles horizontal vertical'
-cmd-comma = 'layout accordion horizontal vertical'
+alt-slash = 'layout tiles horizontal vertical'
+alt-comma = 'layout accordion horizontal vertical'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#focus
 alt-h = 'focus left --boundaries all-monitors-outer-frame'
@@ -119,40 +123,40 @@ alt-k = 'focus up --boundaries all-monitors-outer-frame'
 alt-l = 'focus right --boundaries all-monitors-outer-frame'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move
-cmd-shift-h = 'move left'
-cmd-shift-j = 'move down'
-cmd-shift-k = 'move up'
-cmd-shift-l = 'move right'
+ctrl-alt-h = 'move left'
+ctrl-alt-j = 'move down'
+ctrl-alt-k = 'move up'
+ctrl-alt-l = 'move right'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#resize
-cmd-shift-minus = 'resize smart -50'
-cmd-shift-equal = 'resize smart +50'
+alt-shift-minus = 'resize smart -50'
+alt-shift-equal = 'resize smart +50'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
-cmd-1 = 'workspace 1'
-cmd-2 = 'workspace 2'
-cmd-3 = 'workspace 3'
-cmd-4 = 'workspace 4'
-cmd-5 = 'workspace 5'
-cmd-6 = 'workspace 6'
-cmd-7 = 'workspace 7'
-cmd-8 = 'workspace 8'
-cmd-9 = 'workspace 9'
-cmd-0 = 'workspace 10'
+alt-1 = 'workspace 1'
+alt-2 = 'workspace 2'
+alt-3 = 'workspace 3'
+alt-4 = 'workspace 4'
+alt-5 = 'workspace 5'
+alt-6 = 'workspace 6'
+alt-7 = 'workspace 7'
+alt-8 = 'workspace 8'
+alt-9 = 'workspace 9'
+alt-0 = 'workspace 10'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
-cmd-shift-1 = ['move-node-to-workspace 1', 'workspace 1']
-cmd-shift-2 = ['move-node-to-workspace 2', 'workspace 2']
-cmd-shift-3 = ['move-node-to-workspace 3', 'workspace 3']
-cmd-shift-4 = ['move-node-to-workspace 4', 'workspace 4']
-cmd-shift-5 = ['move-node-to-workspace 5', 'workspace 5']
-cmd-shift-6 = ['move-node-to-workspace 6', 'workspace 6']
-cmd-shift-7 = ['move-node-to-workspace 7', 'workspace 7']
-cmd-shift-8 = ['move-node-to-workspace 8', 'workspace 8']
-cmd-shift-9 = ['move-node-to-workspace 9', 'workspace 9']
-cmd-shift-0 = ['move-node-to-workspace 10', 'workspace 10']
+alt-shift-1 = ['move-node-to-workspace 1', 'workspace 1']
+alt-shift-2 = ['move-node-to-workspace 2', 'workspace 2']
+alt-shift-3 = ['move-node-to-workspace 3', 'workspace 3']
+alt-shift-4 = ['move-node-to-workspace 4', 'workspace 4']
+alt-shift-5 = ['move-node-to-workspace 5', 'workspace 5']
+alt-shift-6 = ['move-node-to-workspace 6', 'workspace 6']
+alt-shift-7 = ['move-node-to-workspace 7', 'workspace 7']
+alt-shift-8 = ['move-node-to-workspace 8', 'workspace 8']
+alt-shift-9 = ['move-node-to-workspace 9', 'workspace 9']
+alt-shift-0 = ['move-node-to-workspace 10', 'workspace 10']
 
-# See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
+# See: https://nikitabobo.github.io/AeroSpace/commands#workspace-back-and-forth
 alt-tab = 'workspace-back-and-forth'
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-workspace-to-monitor
 alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
@@ -189,35 +193,23 @@ alt-shift-l = ['join-with right', 'mode main']
 alt-shift-r = ['exec-and-forget /opt/homebrew/bin/sketchybar --reload']
 
 
-# [[on-window-detected]]
-# if.app-id = 'nl.stickybit.OTP-Manager'
-# run = ['layout floating']
-
-#[[on-window-detected]]
-#if.window-title-regex-substring = '^BIG-IP'
-#run = ['layout floating']
-
 [[on-window-detected]]
 if.app-id = 'com.kakao.KakaoTalkMac'
-run = ['move-node-to-workspace 8']
-
-[[on-window-detected]]
-if.app-id = 'com.tdesktop.Telegram'
-run = ['move-node-to-workspace 8']
-
-[[on-window-detected]]
-if.app-id = 'com.hnc.Discord'
-run = ['move-node-to-workspace 8']
+run = ['layout floating']
 
 [[on-window-detected]]
 if.app-id = 'com.clickup.desktop-app'
 run = ['move-node-to-workspace 5']
 
 [[on-window-detected]]
-if.app-id = "md.obsidian"
+if.app-id = "notion.id"
 run = ['move-node-to-workspace 9']
 
 [[on-window-detected]]
-if.app-id = 'com.apple.weather'
-run = ['layout floating']
+if.app-id = 'com.tinyspeck.slackmacgap'
+run = ['move-node-to-workspace 8']
+
+# [[on-window-detected]]
+# if.app-name-regex-substring = '.*'
+# run = ['layout floating']
 

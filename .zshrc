@@ -13,7 +13,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-PATH=~/.console-ninja/.bin:$PATH
+
 
 # pnpm
 export PNPM_HOME="/Users/${user}/Library/pnpm"
@@ -46,7 +46,6 @@ typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 eval "$(fzf --zsh)"
 
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # -- Use fd instead of fzf --
@@ -81,7 +80,7 @@ export FZF_DEFAULT_OPTS="--color=fg:${fg},bg:${bg},hl:${purple},fg+:${fg},bg+:${
 
 # ----- Bat (better cat) -----
 
-export BAT_THEME=tokyonight_night
+export BAT_THEME=Dracula
 
 export FZF_CTRL_T_OPTS="--preview 'bat -n --color=always --line-range :500 {}'"
 export FZF_ALT_C_OPTS="--preview 'eza --tree --color=always {} | head -200'"
@@ -108,6 +107,8 @@ alias ls="eza --color=always --long --git --no-filesize --icons=always --no-time
 # ---- Zoxide (better cd) ----
 eval "$(zoxide init zsh)"
 
+alias cd="z"
+
 fastfetch
 
 # ---- fnm ----
@@ -115,3 +116,4 @@ eval "$(fnm env --use-on-cd --shell zsh)"
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+

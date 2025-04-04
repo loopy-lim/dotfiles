@@ -271,7 +271,7 @@
                                     "key_code": "d",
                                     "modifiers": { "optional": ["any"] }
                                 },
-                                "to": [{ "shell_command": "/opt/homebrew/bin/aerospace workspace \"$(/opt/homebrew/bin/aerospace list-workspaces --monitor mouse --visible)\" && /opt/homebrew/bin/aerospace workspace prev" }],
+                                "to": [{ "shell_command": "/opt/homebrew/bin/aerospace workspace prev" }],
                                 "type": "basic"
                             },
                             {
@@ -286,7 +286,7 @@
                                     "key_code": "f",
                                     "modifiers": { "optional": ["any"] }
                                 },
-                                "to": [{ "shell_command": "/opt/homebrew/bin/aerospace workspace \"$(/opt/homebrew/bin/aerospace list-workspaces --monitor mouse --visible)\" && /opt/homebrew/bin/aerospace workspace next" }],
+                                "to": [{ "shell_command": "/opt/homebrew/bin/aerospace workspace next" }],
                                 "type": "basic"
                             },
                             {

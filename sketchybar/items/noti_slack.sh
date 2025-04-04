@@ -8,7 +8,8 @@ noti_slack=(
   background.height=24
   icon=$ICON_CHAT
   script="$PLUGIN_DIR/noti_slack.sh"
+  icon.font="$FONT:Regular:15.0"
 )
 
-sketchybar --add noti.slack right \
+sketchybar --add item noti.slack right \
            --set noti.slack "${noti_slack[@]}"

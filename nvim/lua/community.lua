@@ -26,4 +26,8 @@ return {
   { import = "astrocommunity.completion.copilot-lua-cmp" },
   { import = "astrocommunity.colorscheme.dracula-nvim" },
   { import = "astrocommunity.pack.typescript-all-in-one" },
+  -- { import = "astrocommunity.completion.copilot-lua-cmp" },
+  { import = "astrocommunity.recipes.heirline-vscode-winbar" },
+  -- { import = "astrocommunity.pack.typescript" },
+  -- import/override with your plugins folder
 }

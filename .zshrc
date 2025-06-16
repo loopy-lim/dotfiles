@@ -1,10 +1,19 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 user=$(whoami)
 
 export ZSH="$HOME/.oh-my-zsh"
 
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
-plugins=(git)
+plugins=(
+  git
+)
 
 source $ZSH/oh-my-zsh.sh
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -13,7 +22,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-PATH=~/.console-ninja/.bin:$PATH
+
 
 # pnpm
 export PNPM_HOME="/Users/${user}/Library/pnpm"
@@ -106,7 +115,7 @@ _fzf_comprun() {
 alias ls="eza --color=always --long --git --no-filesize --icons=always --no-time --no-user --no-permissions"
 
 # ---- Zoxide (better cd) ----
-eval "$(zoxide init zsh)"
+eval "$(zoxide init --cmd cd zsh)"
 
 fastfetch
 
@@ -115,3 +124,9 @@ eval "$(fnm env --use-on-cd --shell zsh)"
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+PATH=~/.console-ninja/.bin:$PATH
+export PATH=$PATH:$(go env GOPATH)/bin
+
+export PATH=$HOME/development/flutter/bin:$PATH
+

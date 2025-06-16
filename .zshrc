@@ -117,3 +117,5 @@ eval "$(fnm env --use-on-cd --shell zsh)"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+
+PATH=~/.console-ninja/.bin:$PATH

@@ -116,7 +116,7 @@ alias ls="eza --color=always --long --git --no-filesize --icons=always --no-time
 # ---- Zoxide (better cd) ----
 eval "$(zoxide init --cmd cd zsh)"
 
-alias cd="z"
+# alias cd="z"
 
 fastfetch
 
